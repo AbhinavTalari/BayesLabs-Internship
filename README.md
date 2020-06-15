@@ -8,4 +8,4 @@ This paper describes ways to use the current function descriptors to select SOMs
 
 
 
-<img src='x1.PNG'>
+<img src='x1.PNG' style='text-align:"center"'>

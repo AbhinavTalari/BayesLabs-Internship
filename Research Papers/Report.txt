@@ -1,0 +1,5 @@
+
+
+Computation Tools : 
+A number of computational tools for metabolism prediction have been developed over the last 20 years to predict the structures of small molecules undergoing biological transformation or environmental deg‑radation. These tools were largely developed to facilitate absorption, distribution, metabolism, excretion, and toxic‑ity (ADMET ) studies, although there is now a growing interest in using such tools to facilitate metabolomics and exposomics studies. However, their use and widespread adoption is still hampered by several factors, including their limited scope, breath of coverage, availability, and performance
+The ability to predict and identify metabolically labile atompositions in a molecule (i.e., sites of metabolism, SoMs) can aidin the derivation of likely metabolites and, consequently,strategies for the optimization of the metabolic properties ofsmall molecules. However, experimental identification of SoMsor metabolites is an expensive and time-consuming task.Therefore, being able to accurately predict SoMs without theneed to carry out laboratory experiments would greatly reducecosts and time needed to evaluate each compound

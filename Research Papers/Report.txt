@@ -1,5 +1,247 @@
+Metabolomics and Drug- Discovery Relationship:
+
+Metabolism is synthesis and transformation of one biomolecule to another, occurring constantly within a  living cell through enzyme catalysed chemical reactions. Once transformed these biomolecules, aka metabolites,  acquire new physiochemical and pharmacological properties.
+Knowledge of metabolite substrate structure and resultant product metabolite will aid in better understanding of the drug development process. 
+
+It takes years of research and a large capita input to bring a drug molecule into market and many of them are still withdrawn within a year or two of their release due to observed Idiosyncratic adverse drug reactions(IADR), which are caused due to unknown reasons. 
+
+Every drug molecule, irrespective of its site of absorption, undergoes first pass metabolism. First pass metabolism is defined as the phenomenon in which a drug after absorption, irrespective of its site of absorption, undergoes metabolic reaction at a particular location in the body, these specific reactions aim to reduce the bioavailability of the active drug component when the drug molecule reaches its target site. The main site in the body where first pass metabolism occurs is the liver. 
+ 
+Hence we can say that the liver uses biotransformation reactions as a primary line of defense against potentially harmful xenobiotics. Biotransformation results in the formation of metabolites with different physicochemical and biological properties, depending on which the resultant metabolite could either be a potential therapeutic drug or a toxic compound. These metabolic reactions that are responsible for transforming the drug into its active metabolite are broadly classified into two types: Phase I and Phase II reactions. The main enzyme involved in Phase I reaction is the family of CYP enzymes.
+
+The cytochrome P450 (CYP)[1] enzymes are a family of proteins which catalyse a wide variety of metabolic reactions, including: oxidations, reduction,  dehydrogenation, hydrolysis and so on. Hence most of the drugs in the liver are catalyzed by CYP enzymes, they tend to make drug metabolite more hydrophilic in order to eliminate them from the system, therefore drug metabolism results in altered efficacy and bioavailability. In case, the drug is metabolised at a quick rate, it will result in decreased bioavailability, also resultant metabolite could be more hydrophilic than the parent compound, which would result in faster elimination.  
+
+For this reason, substantial efforts are being made to establish which molecules are metabolized into reactive metabolites and what could be the possible metabolite of a potential drug after it enters the system. The main problem encountered during drug development is that standard techniques produce potential lead compounds in months or years. Due to the time constraint involved, there has been more focus on recent development of computational methods to help with this process. 
+
+These computational tools were specifically designed to predict the xenobiotics metabolism. Typically these tools require a starting parent compound and use pattern recognition techniques together with hand-made rules or algorithms in machine learning to describe: (1) a site of reaction or a site of metabolism (SoM) within the molecule; and/or (2) a set of chemical products resulting from a biotransformation at the specific SoM. These tools are also modified to predict certain types or classes of reactions.
 
 
-Computation Tools : 
-A number of computational tools for metabolism prediction have been developed over the last 20 years to predict the structures of small molecules undergoing biological transformation or environmental deg‑radation. These tools were largely developed to facilitate absorption, distribution, metabolism, excretion, and toxic‑ity (ADMET ) studies, although there is now a growing interest in using such tools to facilitate metabolomics and exposomics studies. However, their use and widespread adoption is still hampered by several factors, including their limited scope, breath of coverage, availability, and performance
-The ability to predict and identify metabolically labile atompositions in a molecule (i.e., sites of metabolism, SoMs) can aidin the derivation of likely metabolites and, consequently,strategies for the optimization of the metabolic properties ofsmall molecules. However, experimental identification of SoMsor metabolites is an expensive and time-consuming task.Therefore, being able to accurately predict SoMs without theneed to carry out laboratory experiments would greatly reducecosts and time needed to evaluate each compound
+Computational Tools :
+
+SoM ( Sites of Metabolism ) in a drug molecule are certain atoms,lone pairs , bonds which are potentially susceptible to being metabolised by the enzymes such as CYP450 , creating metabolites which are either harmful or non reactive.
+
+The ability to predict and identify metabolically labile atom positions in a molecule (i.e., sites of metabolism, SoMs) can aid in the derivation of likely metabolites and, consequently,strategies for the optimization of the metabolic properties of small molecules. However, experimental identification of SoMs or metabolites is an expensive and time-consuming task.Therefore, being able to accurately predict SoMs without the need to carry out laboratory experiments would greatly reduce costs and time needed to evaluate each compound.
+ A number of computational tools for metabolism prediction have been developed over the last 20 years to predict the structures of small molecules undergoing biological transformation or environmental degradation. These tools were largely developed to facilitate absorption, distribution, metabolism, excretion, and toxicity (ADMET ) studies.
+Some of the Tools which aided the SOM Predictions are , BioTransformer, FAME, GLORY, later improved as XenoSite. Deep Learning and Machine Learning has helped improve the efficiency of such tools drastically using heuristic approach, logistic regression or by creating neural networks. 
+
+BioTransformer :
+
+Biotransformer[2], is a freely available web service for accurate, and comprehensive in silico tool which predicts metabolites of a molecule. It consists of two components: a metabolism prediction tool(BMPT), and a metabolite identification tool(BMIT). 
+
+The BMPT consists of five independent prediction modules called “transformers[2]”, namely: (1) the Enzyme Commission based (EC-based) transformer, (2) the CYP450 (phase I) transformer, (3) the phase II transformer, (4) the human gut microbial transformer, and (5) the environmental microbial transformer. 
+
+BioTransformer implements two approaches, a knowledge-based approach, and a machine-learning approach for metabolite prediction. The BMPT machine learning system uses a set of random forest and ensemble prediction models to predict the selectivity of CYP450 substrates, and to filter molecules for Phase II. BMIT builds on the BMPT to identify specific metabolites using data from mass spectrometry (MS), namely information from the mass or chemical formula. 
+
+For a diverse range of xenobiotics, BioTransformer can reliably predict single-step biotransformations. Biotransformer's main advantage is the integration of environmental metabolism with endogenous human and gut microbial metabolism that allows BioTransformer to cover a broader range of metabolites.
+
+Evident enhancements are required to existing BioTransformer including: (1) validation of BioTransformer 's predictions for a broader and more complex molecular test set; (2) the experimental validation of BioTransformer’s BMIT predictions for a larger set of molecules and experimental data; (3) the expansion of the reaction knowledgebase to cover more reactions, and (4) the addition of new options for metabolite
+prediction/ranking.
+
+
+GLORY: 
+
+GLORY[3] is another tool used for predicting metabolite structures formed by CYPs. GLORY incorporates two key ideas: a literature-based collection of CYPmediated reaction rules and SoM prediction. The database used for training the model used a collection of 73 reaction rules, describing 61 reaction types, for CYP-mediated metabolism. Priority was given to reproducibility of the rule set and rules were based on the scientific literature rather than on any dataset. Additionally, each reaction was categorised as either common or uncommon based on the scientific literature.
+
+The predicted metabolites are assigned a priority score on the basis of predicted SoM probabilities and whether they are common or uncommon reaction types. The SoM predictions were made using the  FAME 2 software (Šícho et al., 2017), which included pre-processing of molecules. 
+
+GLORY has two modes: MaxEfficiency and MaxCoverage[3]. The former filters molecules first via  SoM prediction and the latter, does not use a prefilter and instead focuses on high recall and an accurate ranking of the predicted metabolites. As mentioned before, using priority score GLORY can rank the metabolites predicted by MaxCoverage mode to the extent that GLORY can predict at least one known metabolite within the top three ranked positions for 76% of the molecules in the independent test set while achieving a recall of 0.83. In terms of recall, GLORY's MaxCoverage mode outperforms SyGMa and BioTransformer, and outperforms SyGMa in ranking terms.
+
+The Fundamental Difference between GLORY and  BioTransformer is that BioTransformer highly depends on the reasoning engine , which incorporates and uses the Knowledge base to find the reaction pathway, this aids in prediction of the metabolites formed by the Phase I Reaction, using MetXBio db. On the other hand, GLORY uses FAME as a SOM Predictor and has 2 Modes, MaxCoverage and MaxEfficiency which assigns Scores to the Potential SOMs in order to predict metabolites based on precision Recall Cutoffs, But the MaxCoverage has a major flaw of predicting a lot of putative false positives, at least 53 per parent molecule. 
+
+
+FAME 2: 
+
+Because Fame provides GLORY[3] an upper hand over previously developed metabolite predictie tools, we decided to gain a better understanding of a FAME tool and it's method for SOM predictions. A SoM prediction methodology should take into account: “(i) reactivity of atom positions in a molecule, (ii) pharmacophoric and shape constraints imposed by the binding site of the enzyme, and (iii) the accessibility of potential sites from the catalytic center.”
+
+FAME 2, which is used in GLORY for SoM prediction, is a recently developed machine learning-based tool. The extra trees classifier models of FAME 2, which are based on a set of 2D circular descriptors, were developed specifically to predict SoMs of metabolic reactions catalyzed by the CYP family of enzymes in humans. FAME 2 is highly accurate, achieving, on an independent test set, a Matthews correlation coefficient of 0.57 and an area under the receiver operating characteristic curve (AUC) of 0.91[4].
+
+FAME[4] uses a revised Zaretzki data set, and describes a relatively simple 2D method to capture atomic environments of potential SoMs and show that models (Extremely Randomized Trees) built using such descriptors have comparable or better performance than other more complex approaches reported in the literature.
+
+Nonetheless, FAME is used in GLORY as an SOM prediction tool. A limitation that falls on all three tools mentioned till now is the lack of visualization for better interpretation, these tools predict SOM but do not say anything about the type of reaction and the site of reactivity. To overcome these limitations new computational tools with better accuracy and result were developed such as XenoSite.
+
+
+Rainbow  Xenosite SOM: A Visual Approach to SOM Predictions[5]:
+
+The existing ;approaches to modeling phase I metabolism fall into three categories:
+(1) generic site of metabolism (SOM) prediction, (2) reaction-type specific SOM prediction,
+and (3) multiple reaction-type SOM prediction. All existing approaches fail to accurately
+predict bioactivation due to limitations in their ability to unambiguously identify metabolite
+structures from model predictions. But Both site and type identifications are important for determining whether a metabolic transformation is beneficial or harmful.
+
+To overcome above mentioned limitations, recently developed metabolite predicting computational tools were built such as XenoSite particularly the Rainbow XenoSite version. 
+
+
+Figure 1: Shows the type of reactions Chloramphenicol(antibiotic)  undergoes. As shown in the diagram, Chloramphenicol undergoes four types of reactions, but we are interested in Dehalogenation and  Nitro Reduction as these are the only reaction classes which yield toxic compounds. Source: Rainbow Xenosite ( L.D Na et al).
+
+
+Just finding the  site of metabolites is not enough, we need to know the reaction type which helps us predict the potential metabolites to mark them as harmful or non-harmful. The above given diagram depicts the possible reactions that might occur. Each colored circle  marked is a known site .
+Reactivity scores were assigned based on the reactivity model, the scores ranged from 0-1 displayed as the rainbow  shading.
+So far our predictions were not probabilistic but this approach will make the predictions to be probabilistic which in turn increases the credibility of our predictions.
+
+
+For Reaction Visualisation to be easier to interpret 5 colors of Metabolisms were devised.
+
+
+Figure 2: This table is adapted from the Metabolic Rainbow model of XenoSite. It shows how the model classifies reactions into five subclasses of CYP mediated reactions and each color denotes the type of reaction a particular molecule undergoes; red for Stable Oxygenation(SO), orange for unstable oxygenation(UO), green for Dehydrogenation(DH), blue for Hydrolysis(HD) and purple for Reduction(RD).
+
+
+
+
+
+
+
+
+
+
+
+
+
+Deep Learning Approach towards Probabilistic Prediction:  
+
+To make this Prediction of SOMs and calculation of reactivity scores we used State of the Art Multitarget Neural Networks which provides a probabilistic approach in finding the scores based on the parent  Molecule and Descriptors(Both Atomic and Molecular)[5].  
+
+
+
+
+
+
+Figure 3: The flow depicts working of the reaction model. The Left part of the image shows how information travels through the neural network model. This network contains one input
+layer, two hidden layers, and two output layers. The number of nodes and descriptors used are shown. . Colored circles are used to depict model predictions, the color variation can range 0 to 1. 
+The right side of the image shows an example of how the bond and molecule neural networks are trained.
+
+
+Dataset Used : Accelrys Metabolite Database (AMD).
+
+For further insights on the reaction and the molecule , 3 Levels of Visualisations were introduced
+Summary: Which Showed the SOM and the Reactivity of the SOM Using Colors and the Scores associated with it.
+Color Based: Which shows which type of the reactions happens as per the Color-Reaction Scheme given above.
+Type: Which Shows us the reaction which occurs from the available 21 reactions based on colors.
+
+Figure 4: The Picture depicts the 3 levels of visualisation mentioned above. Source: The Metabolic Rainbow.
+
+To make these visualisations much more distinct to the naked eye, probability aggregations  and scalings were applied to the predicted values.
+
+
+Results and Conclusion :
+First, Rainbow XenoSite and single reaction type models are the only models that produce
+well-scaled, probabilistic output. Second, Rainbow XenoSite covers the largest proportion of known human phase I metabolic reactions of all phase I models.  Third, Rainbow XenoSite is a more comprehensive model of reaction types and includes many important bioactivation reactions missed by other models.
+
+Compared to the generic-SOM labeling-scheme, the rainbow-SOM labeling-scheme significantly reduces the ambiguity in mapping from the labels to reported products.
+
+Rainbow XenoSite has molecule AUCs of 78.3%,83.9%,77.3%,90.4%and 92.7% for stable oxygenation, unstable oxygenation, dehydrogenation, reduction, and hydrolysis,respectively.
+
+Hence Rainbow Xenosite was a tool developed to overcome the limitation of result visualization, as it evident from its results it is a quite powerful tool but the limitation encountered was its inability to identify certain type of oxidation reactions such as Epoxidation, Quinone formation , which was later discussed in the document. These reactions are important to put into consideration, as they result in toxic metabolites, and their prediction could help in filtering compounds which have to be excluded for further drug development, or they could be used to analyse and modify existing drug molecule substructure to make it less toxic and more efficacious. 
+
+
+XenoSite:
+
+Continuous research leads to development of tools in a similar manner; improving on previous tools. For some isozymes, a new method, XenoSite[6], is quicker to train and more accurate by as much as 4 percent or 5 percent for some isozymes. It uses the substrate and unlike other models descriptor used here is a combination of topological (TOP) and quantum chemical (QC) descriptors, a SMARTCyp reactivity (SCR) descriptor in addition to a refined subset of the QC descriptors (SQC) and a new molecule-level (MOL) and fingerprint similarity (FP) descriptors. 
+
+Neural networks used here is what provides it faster computation time than other models such as SVM models used by RSP, developed by the same authors previously.  In addition, XenoSite produces probabilistic SOM scores which indicate the confidence of the model.
+
+Dataset used for training the model was a collection of 680 CYP substrates catalysed by CYP enzymes. On average, Optimal XenoSite models are 87 percent accurate across all analyzed substrate sets.  Another observed indication was that due to the presence of molecule-level descriptors and pruned atom-level descriptors, XenoSite outperforms RSP method.
+
+Xenosite provides accurate and probabilistic results while predicting SOM[6], which will be very useful in drug discovery but it does not say anything about the reactivity of the molecule. There are other types of oxidation reactions, which are not predicted by XenoSite, such as epoxidation and quinone formation. These compounds result in toxic metabolites and hence should be detected more efficiently. 
+
+
+XenoSite Epoxidation:
+
+Epoxide metabolites frequently drive drug toxicity, and precise strategies for predicting epoxide formation are crucial in drug development. The site of epoxidation (SOE), is defined as the  identity of the specific bond in a molecule undergoing epoxidation[7].
+
+A model was built for prectiing SOE within epoxidized molecules; such models can help in modifying structural sites in a  molecule to decrease its toxicity. This model also differentiates between SOE and sites of sp2 hydroxylation (SOH), a key negative control. Since both SOEs and SOHs are oxidized by P450s, a tool is needed to accurately distinguish between these two. 
+
+Previous models, which predict the P450 site of metabolism, will not distinguish between SOE and SOH. This model recognises which molecules are metabolized into epoxides, separating these molecules from closely related non-epoxide molecules allowing rapid screening of potentially toxic compounds[6].
+
+The dataset used for model training consists of total 702 chemically diverse reactions obtained from the Accelrys Metabolite  Database(AMD), each of which takes place in humans, human cells, or human microsomes and is classified as epoxidation. An automated labeling algorithm used these motifs to label SOEs on the starting molecule of each reaction.
+
+The model was built for predicting bond and molecule level epoxidation using a deep neural network with one input layer, two hidden layers, and two output layers as shown below in Figure 5. The top-level output layer computed molecule-level predictions called the molecule epoxidation scores (MES); the next output layer computed bond-level predictions called the bond epoxidation scores (BES).
+
+
+
+Figure 5. The diagram above  shows how information flows through the epoxidation model and the Deep Learning architecture. The model consists of one input layer, two hidden layers, and two output layers. This model computed a molecule-level prediction for each test molecule as well as predictions for each bond within that test molecule. From the 3D structure of an input molecule, 23 molecule-level and 191 bond-associated descriptors were calculated. This image is adapted from Hughes, T.B. 2015.
+
+
+The qualified model predicts SOEs by computing one BES in a test molecule for each bond. These values vary from zero to one and indicate the possibility of an epoxide forming on both atoms within the corresponding bond. If accurate, BES should differentiate within epoxidized molecules between the SOEs and all other bonds. The epoxidation model trained on SOE data identifies with 94.9% AUC performance the SOEs within epoxidized molecules. The model also classifies epoxidized and non-epoxidized molecules with 79.3% AUC. 
+
+This model has the limitation of not being able to score the epoxide reactivity. It is important, because there exist many compounds which form epoxides, but due to their variable short life, their effect on toxicity varies. The half lives of epoxides can range from one second to several hours.
+
+
+
+
+
+
+
+
+
+
+
+XenoSite Quinone Formation:
+
+Quinone is another toxic metabolite formed during oxidation in first pass metabolism. The study we mention here uses a deep learning approach for predicting quinone formation, for the first time[8]. The model accurately predicted the specific atom pairs within molecules that form quinones: their quinone-forming pairs (QPs)  and  quinone-forming and non quinone-forming molecules which can be used to quickly screen for molecules likely to form reactive metabolites, a key toxicity risk.
+
+The dataset used was a set of chemically diverse metabolic reactions that form quinones derived from the literature-derived Accelrys Metabolite Database (AMD. In total, 576 reactions were extracted, each observed in humans, human cells, or human microsomes. The dataset contained 377 single-step quinone formation reactions and 199 two-step quinone formation reactions. An automated algorithm used the structure of each quinone product to label the QP on its metabolic parent, for one-step and two-step reactions[8]. 
+
+The model was built using a deep convolutional neural network with one molecule layer, one input layer, three hidden layers, and three output layers as mentioned below in figure 6. The top output layer computed molecule quinone formation scores (MQS), the middle output layer computed pair quinone formation scores (PQS), and the bottom output layer computed atom quinone formation scores (AQS). Respectively, the molecule-, pair-, and atom-level scores represented the probability that a molecule, pair, or atom formed a quinone, each score ranging from zero to one. The network was trained in three stages.
+
+
+
+Figure 6: Structure of the quinone formation model. The network on the left depicts how information is propagated through the model. Source :Deep Learning to Predict the Formation of Quinone Species in Drug Metabolism( B. H Tyler et. al)
+
+
+
+
+On the atom level, we predict sites of quinone formation with an AUC accuracy of 97.6%, and we identify molecules that form quinones with 88.2% AUC. By modeling quinone formation, one of the most common types of reactive metabolite formation, our method provides a rapid screening tool for a key drug toxicity risk.
+
+Limitations: The model predicts quinone formation, it does not predict the reactivity of those quinones.
+Integration of the quinone formation model with models of reduction and detoxification can provide more comprehensive results. Moreover, the quinone formation model does not correct for alternate metabolic pathways that may detoxify molecules before they can form quinones. Because of these metabolic alternatives, quinone formation is sometimes observed in vitro but does not occur in vivo.
+
+
+Applied Deep Learning to Model Reactivity of Macromolecules:
+
+Most small-molecule drug candidates fail before entering the market,1frequently because of unexpected toxicity. Often,toxicity is detected only late in drug development, because many types of toxicities, especially idiosyncratic adverse drug reactions (IADRs), are particularly hard to predict and detect[9]. Moreover, drug-induced liver injury (DILI) is the most frequent reason drugs are withdrawn from the market and causes 50% of acute liver failure cases in the United States
+In the initial section, we summarize a systematic effort to optimize the structure and training of the model, with the goal of choosing the best method for predicting reactivity. The following sections then investigate the performance of the final optimized model. First, we evaluated the model’s cross-validated atom reactivity scores (ARS) by testing SOR classification performance within reactive molecules[9]. Second,we compared ARS performance to that of atom-level quantum chemical reactivity indices. Third, we assessed ARS performance on an external test set. Fourth, we calculated the accuracy of the model’s cross-validated molecule reactivity scores (MRS)at predicting molecule reactivity. Fifth, we compared MRS performance to molecule-level quantum chemical reactivity indices. Sixth, we use the model to estimate the number of high throughput screening molecules that are reactive with macro-molecules (DNA and protein) but are not flagged by small-molecule trapping agents (GSH and cyanide).
+
+
+
+
+Modelling :
+First, we hypothesized that jointly modeling several types of reactivity in a multitask learning model would improve predictions on the smaller data sets[10]. Indeed, the multitask model outperformed the individual modeling approach at predicting cyanide and protein SOR.This is likely because the cyanide and protein reactivity tasks are the most difficult and, therefore, benefit most from integrated modeling[10]. The cyanide data set is difficult because it is small, and the protein data set is both small and includes the most diverse mechanisms. The data reported herein reflects modeling all four types of reactivity together in a multitask network, instead of building separate models for each task.
+The MultiTask Learning enabled us to reach better accuracies. XenoSite’s cross-validated ARS predicted reactive atoms with average site AUC accuracies of 96.6%, 89.8%, 92.8%, and94.4%, and top-two accuracies of 83.9%, 80.6%, 80.9%, and84.2%, for cyanide, DNA, GSH, and protein. For cyanide, DNA, GSH, and protein, the model separates reactive and nonreactive molecules with, respectively, 90.3%, 78.7%, 77.7%, and 79.8% AUC.
+
+A simple model predicts UGT-mediated metabolism :
+
+Uridine diphosphate glucuronosyltransferases (UGTs) are an important family of proteins that metabolize 15% of FDA-approved drugs (Williamset al., 2004). UGTs conjugate glucuronic acid to a diverse range of molecules, rendering them more hydrophilic and more easily eliminated. Specifically, the glucuronic acid can conjugate to oxygens, nitrogens, sulfurs or carbons, in order of decreasing likelihood
+XenoSite UGT model uses a similar approach as existing methods,by learning rules from a training dataset derived from the AMD. We built the XenoSite model using 2898 unique substrates containing4557 glucuronidation reactions, 3.2 times more reactions than used in previous models.XenoSite improves on existing approaches, including the simple heuristic model, in several ways. First, it improves on the SOM-UTG model described byPenget al.(2014), who used support vector ma-chines to build four independent classification models to differentiate between observed and unobserved SOMs for common substructures vulnerable to UGT-mediated metabolism—aromatic and aliphatic hy-droxyls, carboxylic acids and nitrogen containing groups. UnlikeXenoSite, SOM-UGT cannot predict glucuronidation of less common or atypical substructures, such as ketones, thiols, or amides.Moreover. 
+This model was useful for two reasons. First, it provided a baseline of performance that more complex methods should outperform. Second, the molecules it cannot predict were good test cases for more complicated algorithms. In this heuristic model, all the potential sites of UGT metabolism in a test molecule were identified.Each potential site was labeled by its overall probability of being metabolized in the database. Matching these probabilities, the AlOH, ArOH, COOH, Nitrogen and Atypical groups were assigned the initial scores of, respectively, 49.6, 76.3, 80.0, 8.5 and 0.14%.Next, these scores were summed across the whole molecule to compute a normalization term. Finally, the initial scores were divided by this normalization term to yield the final score. This score sums toone in molecules that have at least one potential site. The atoms of a molecule with no potential sites all receive a score of zero. A Python implementation of this model is included in the Supplementary Materials to facilitate future studies.2.4 Descriptors A vector of numerical descriptors represented each atom in a test molecule; 98 descriptors in total, 62, 20, and 16 of which encode topological-, molecule- and quantum chemical-derived chemical Fig. 1.Four types of UGT catalyzed reactions. UGTs attach glucuronides to molecules to detoxify them and make them easier to excrete. Glucuronides can be attached to several atom types in a molecule, for example (in order of decreasing likelihood) oxygens, nitrogens, sulfurs and carbons. Specific examples, from the database, of each of these conjugation reactions is displayed. The site of conjugation is circled in the parent molecules.
+
+The Dataset used was a modified version of the Zaritski Data. A matrix of descriptor encoded atoms was presented to a neural net-work with 10 hidden nodes. This approach gave us better accuracy. The Neural network used cross-validated Top-1, Top-2 and Top-3 accuracies  of  86.1,  97.1  and  98.9%  for  the  training  set. 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+References:
+McDonnell, A.M. and Dang, C.H. (2013) “Basic Review of the Cytochrome P450 System”, Journal of the advanced practitioner in oncology, 4(4), p. 263-268.
+Djoumbou‑Feunang, Y. et al. (2019) “BioTransformer: a comprehensive computational tool for small molecule metabolism prediction and metabolite identification”, Journal of Cheminformatics, 11:2, DOI: 10.1186/s13321-018-0324-5
+K. B Christina et al ,2019, “GLORY :Generator of the structure of likely Cytochrome P450 Metabolites Based on Predicted Sites of Metabolism”, Frontier in Chemistry,7. DOI/10.3389/fchem.2019.00402,Medicinal and Pharmaceutical Chemistry,a section of the journal Frontiers in Chemistry
+Šícho, M.et al. (2017) “FAME 2: Simple and Effective Machine Learning Model of Cytochrome P450 Regioselectivity”, Journal of Chemical Information and Modeling, 57(8), pp.1832-1846.
+Dang, N.L. et al. (2020) “The Metabolic Rainbow: Deep Learning Phase I Metabolism in Five Colors”, Journal of Chemical Information and Modelling, DOI: 10.1021/acs.jcim.9b00836
+Zaretzki, J., Matlock, M., & Swamidass, S. J. (2013). XenoSite: Accurately predicting CYP-mediated sites of metabolism with neural networks. Journal of chemical information and modeling, 53(12), 3373-3383.
+Hughes, T. B., Miller, G. P., Swamidass, S. J. (2015). Modeling Epoxidation of Drug-like Molecules with a Deep Machine Learning Network. ACS Central Science, 1(4), 168-180.
+Hughes, T. B. and Swamidass, S. J. (2017). Deep Learning to Predict the Formation of Quinone Species in Drug Metabolism. Chemical Research in Toxicology, DOI: 10.1021/acs.chemrestox.6b00385
+Hughes, T. B., Miller, G. P., Swamidass, S. J. (2015). Site of Reactivity Models Predict Molecular Reactivity of Diverse Chemicals with Glutathione. Chemical Research in Toxicology, 28(4), 797-809.
+Hughes, T. B., Dang, N. L., Miller, G. P., Swamidass, S. J. (2016). Modeling Reactivity to Biological Macromolecules with a Deep Multitask Network. ACS Central Science, DOI: 10.1021/acscentsci.6b00162.
+Dang, N. L, Hughes, T. B., Krishnamurthy, V., and Swamidass, S. J. (2016). A Simple Model Predicts UGT-Mediated Metabolism. Bioinformatics, DOI: 10.1093/bioinformatics/btw350
+
+
+
+
